@@ -35,4 +35,6 @@
   enterTest = ''
     rust-check
   '';
+
+  packages = [ pkgs.neovim ];
 }
