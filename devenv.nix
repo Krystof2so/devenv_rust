@@ -37,4 +37,18 @@
   '';
 
   packages = [ pkgs.neovim ];
+
+  # Installe (ou réinstalle) la config Neovim dans ~/.config/nvrust
+  scripts.nvrust-install.exec = ''
+    set -e
+    dest="$HOME/.config/nvrust"
+    mkdir -p "$dest"
+    cp -r "$DEVENV_ROOT/nvim-config/." "$dest/"
+    echo "Config Neovim installée dans $dest"
+  '';
+
+  # Lance Neovim avec la config du cours
+  scripts.nvrust.exec = ''
+    exec env NVIM_APPNAME=nvrust nvim "$@"
+  '';
 }
