@@ -22,7 +22,7 @@ opt.updatetime = 300 -- int: Temps en millisecondes avant que le CursorHold s'ac
 opt.history = 1000 -- int : Nombre de commandes dans l'historique
 
 -- ------------------------------------------------------------------------------------
--- Créer le répertoire pour l'undo persistant : mkdir -p ~/.local/share/nvim/undo
+-- Créer le répertoire pour l'undo persistant (créé dans stdpath("data"), soit ~/.local/share/nvrust/undo avec nvrust)
 -- La valeur pointe vers un répertoire qui doit exister avant que Neovim ne l'utilise.
 -- Si le répertoire est absent, undofile échoue silencieusement.
 -- Il faut ajouter la création automatique :
