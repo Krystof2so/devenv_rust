@@ -56,18 +56,19 @@ Premier essai : `cargo run`, puis `rust-check` avant chaque commit.
 
 Tout se passe ensuite dans `devenv shell`.
 
-| Commande         | Rôle                                                                                         |
-| ---------------- | -------------------------------------------------------------------------------------------- |
-| `cargo run`      | compiler et lancer le projet                                                                 |
-| `cargo fmt`      | formater le code                                                                             |
-| `cargo clippy`   | lancer le linter                                                                             |
-| `cargo test`     | lancer les tests                                                                             |
-| `rust-check`     | enchaîner `cargo fmt --check`, `cargo clippy` et `cargo test` : à lancer avant chaque commit |
-| `devenv test`    | exécuter la même vérification (code de sortie non nul si une étape échoue)                   |
-| `rust-doc`       | ouvrir la documentation officielle de Rust (hors ligne) dans le navigateur                   |
-| `devenv-sync`    | mettre à jour l'environnement depuis le dépôt modèle (voir ci-dessous)                       |
-| `nvrust-install` | installer la configuration Neovim du cours                                                   |
-| `nvrust`         | lancer Neovim avec cette configuration                                                       |
+| Commande          | Rôle                                                                                         |
+| ----------------- | -------------------------------------------------------------------------------------------- |
+| `cargo run`       | compiler et lancer le projet                                                                 |
+| `cargo fmt`       | formater le code                                                                             |
+| `cargo clippy`    | lancer le linter                                                                             |
+| `cargo test`      | lancer les tests                                                                             |
+| `rust-check`      | enchaîner `cargo fmt --check`, `cargo clippy` et `cargo test` : à lancer avant chaque commit |
+| `devenv test`     | exécuter la même vérification (code de sortie non nul si une étape échoue)                   |
+| `rust-doc`        | ouvrir la documentation officielle de Rust (hors ligne) dans le navigateur                   |
+| `devenv-sync`     | mettre à jour l'environnement depuis le dépôt modèle (voir ci-dessous)                       |
+| `nvrust-install`  | installer la configuration Neovim du cours                                                   |
+| `nvrust-uninstall`| désinstaller la configuration Neovim du cours                                                |
+| `nvrust`          | lancer Neovim avec cette configuration                                                       |
 
 Sans `xdg-open` sur votre système, `rust-doc` affiche le chemin du fichier à ouvrir.
 

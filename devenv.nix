@@ -65,6 +65,25 @@
     echo "Config Neovim installée dans $dest"
   '';
 
+  scripts.nvrust-uninstall.description = "Désinstalle la configuration Neovim du cours et ses données (--yes : sans confirmation)";
+  scripts.nvrust-uninstall.exec = ''
+    dirs=()
+    for base in "''${XDG_CONFIG_HOME:-$HOME/.config}" "''${XDG_DATA_HOME:-$HOME/.local/share}" \
+                "''${XDG_STATE_HOME:-$HOME/.local/state}" "''${XDG_CACHE_HOME:-$HOME/.cache}"; do
+      [ -e "$base/nvrust" ] && dirs+=("$base/nvrust")
+    done
+    [ "''${#dirs[@]}" -eq 0 ] && { echo "Rien à désinstaller."; exit 0; }
+
+    echo "Seront supprimés :"
+    printf '  %s\n' "''${dirs[@]}"
+    if [ "''${1:-}" != "--yes" ]; then
+      read -r -p "Confirmer ? [o/N] " reponse
+      [[ "$reponse" == [oO]* ]] || { echo "Annulé."; exit 1; }
+    fi
+    rm -rf -- "''${dirs[@]}"
+    echo "Configuration nvrust désinstallée."
+  '';
+
   scripts.nvrust.description = "Lance Neovim avec la configuration du cours";
   scripts.nvrust.exec = ''
     exec env NVIM_APPNAME=nvrust nvim "$@"
