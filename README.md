@@ -1,3 +1,5 @@
+[![Built with devenv](https://devenv.sh/assets/devenv-badge.svg)](https://devenv.sh)
+
 # Rust & devenv
 
 Environnement de développement **Rust** reproductible pour apprendre le langage, basé sur [Nix](https://nixos.org/) et [devenv](https://devenv.sh/). Cela permet de le dépolyer sur plusieurs machines.
@@ -126,3 +128,9 @@ devenv test
 Puis *commiter* le `devenv.lock` modifié. Les utilisateurs récupèrent la nouvelle version avec `git pull`.
 
 **Mettre à jour les plugins de Neovim** (procédure prévue, à valider à la première mise à jour) : dans `nvrust`, exécuter `:lua vim.pack.update()` et confirmer, puis copier `~/.config/nvrust/nvim-pack-lock.json` vers `nvim-config/` et *commiter*.
+
+## Licence
+
+Ce dépôt est distribué sous licence MIT : voir le fichier [LICENSE](LICENSE).
+Les plugins de **Neovim** (`catppuccin`, `dashboard-nvim`) sont téléchargés au premier lancement depuis leurs propres dépôts et restent soumis à leurs licences respectives.
+
