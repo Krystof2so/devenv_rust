@@ -10,7 +10,7 @@
     ];
   };
 
-  # Ouvre la documentation officielle de Rust (hors ligne) dans le navigateur
+  scripts.rust-doc.description = "Ouvre la documentation officielle de Rust (hors ligne)";
   scripts.rust-doc.exec = ''
     doc="$(rustc --print sysroot)/share/doc/rust/html/index.html"
     if command -v xdg-open >/dev/null 2>&1; then
@@ -20,7 +20,7 @@
     fi
   '';
 
-  # Vérifie le formatage, lance le linter, puis les tests
+  scripts.rust-check.description = "Vérifie le formatage, lance clippy puis les tests";
   scripts.rust-check.exec = ''
     set -e
     echo "==> cargo fmt --check"
@@ -43,8 +43,7 @@
     pkgs.xclip # presse-papier système sous X11
   ];
 
-  # Installe (ou réinstalle) la config Neovim dans ~/.config/nvrust (ou $XDG_CONFIG_HOME/nvrust)
-  # Ne remplace jamais une config existante sans l'option --force (sauvegarde datée).
+  scripts.nvrust-install.description = "Installe la configuration Neovim du cours (--force : remplace en sauvegardant)";
   scripts.nvrust-install.exec = ''
     set -e
     dest="''${XDG_CONFIG_HOME:-$HOME/.config}/nvrust"
@@ -66,13 +65,12 @@
     echo "Config Neovim installée dans $dest"
   '';
 
-  # Lance Neovim avec la config 
+  scripts.nvrust.description = "Lance Neovim avec la configuration du cours";
   scripts.nvrust.exec = ''
     exec env NVIM_APPNAME=nvrust nvim "$@"
   '';
 
-  # Synchronise les fichiers de l'environnement avec le dépôt modèle.
-  # Ne touche ni au code (src/, Cargo.*) ni au README de l'apprenant.
+  scripts.devenv-sync.description = "Met à jour l'environnement depuis le dépôt modèle (--force : écrase les modifications locales)";
   scripts.devenv-sync.exec = ''
     set -e
     remote_name="modele"

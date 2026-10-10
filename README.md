@@ -54,7 +54,7 @@ Premier essai : `cargo run`, puis `rust-check` avant chaque commit.
 
 ## Commandes
 
-Tout se passe ensuitedans `devenv shell`.
+Tout se passe ensuite dans `devenv shell`.
 
 | Commande         | Rôle                                                                                         |
 | ---------------- | -------------------------------------------------------------------------------------------- |
@@ -70,6 +70,8 @@ Tout se passe ensuitedans `devenv shell`.
 | `nvrust`         | lancer Neovim avec cette configuration                                                       |
 
 Sans `xdg-open` sur votre système, `rust-doc` affiche le chemin du fichier à ouvrir.
+
+ `devenv info` permet d'avoir un descriptif des scripts qui figurent dans `devenv.nix`.
 
 ## Mettre à jour son environnement
 
