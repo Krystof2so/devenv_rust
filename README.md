@@ -2,30 +2,32 @@
 
 # Rust & devenv
 
+![Entrée dans l'environnement](IMG/enter_devenv.png)
+
 Environnement de développement **Rust** reproductible pour apprendre le langage, basé sur [Nix](https://nixos.org/) et [devenv](https://devenv.sh/). Cela permet de le déployer sur plusieurs machines.
 
-Ce dépôt est un dépôt modèle (_template_) : chaque apprenant crée son propre dépôt à partir de celui-ci, y garde son code et son historique, et récupère les évolutions de l'environnement avec la commande `devenv-sync` (voir [Mettre à jour son environnement](#mettre-à-jour-son-environnement)).
+Ce dépôt est un dépôt modèle (_template_) : chaque utilisateur crée son propre dépôt à partir de celui-ci, y garde son code et son historique, et récupère les évolutions de l'environnement avec la commande `devenv-sync` (voir [Mettre à jour son environnement](#mettre-à-jour-son-environnement)).
 
 L'environnement fournit :
 
 - **Rust stable**, dont la version est épinglée par `devenv.lock`
-- `cargo`, `clippy` (linter), `rustfmt` (formateur), `rust-analyzer` (serveur LSP)
+- `cargo`, `clippy` (_linter_), `rustfmt` (formateur), `rust-analyzer` (serveur _LSP_)
 - `rust-src` et `rust-docs` (documentation officielle hors ligne)
-- **Neovim** avec une petite configuration minimale optionnelle (voir infra « Deux façons d'utiliser Neovim »)
+- **Neovim** avec une petite configuration minimale optionnelle (voir [Deux façons d'utiliser Neovim](#deux-façons-d'utiliser-neovim)).
 - un projet **rust** de départ.
 
 ## Prérequis
 
 - **Linux**, avec **git** (dans l'environnement, c'est la version fournie par **devenv** qui est utilisée)
 - **Nix**, installé en mode démon : voir [devenv.sh/getting-started](https://devenv.sh/getting-started/)
-- Les fonctions expérimentales de **Nix**, nécessaires à l'installation de devenv. Ajouter la ligne qui suit dans `~/.config/nix/nix.conf`
+- Les fonctions expérimentales de **Nix**, nécessaires à l'installation de **devenv**. Ajouter la ligne qui suit dans `~/.config/nix/nix.conf`
 
 ```nix
   experimental-features = nix-command flakes
 ```
 
 - **devenv** : `nix profile add nixpkgs#devenv`
-- Quelques Go libres pour le magasin Nix (`/nix` - Idéal sur une partition dédiée) et un accès réseau
+- Quelques Go libres sont nécessaires pour le magasin Nix (`/nix` - Idéal sur une partition dédiée) et un accès réseau.
 
 ## Démarrage
 
@@ -50,7 +52,28 @@ rustfmt --version
 rust-analyzer --version
 ```
 
-Premier essai : `cargo run`, puis `rust-check` avant chaque commit.
+## Premiers pas
+
+Dans `devenv shell`, à la racine de votre dépôt :
+
+```bash
+cargo run                  # compile et lance le projet : affiche « Hello, world! »
+nvrust-install             # une seule fois : installe la configuration Neovim du cours
+nvrust src/main.rs         # ouvre le fichier dans Neovim
+```
+
+Dans **Neovim**, passez en mode Insertion avec `i`, changez le texte du `println!`, revenez en mode Normal avec `Esc`, enregistrez avec `:w` puis quittez avec `:q`. Les commandes essentielles sont résumées dans [docs/neovim.md](docs/neovim.md).
+
+De retour dans le terminal :
+
+```bash
+cargo run                  # votre nouveau message s'affiche
+rust-check                 # formatage, clippy et tests : à lancer avant chaque commit
+git add src/main.rs
+git commit -m "Mon premier changement"
+```
+
+Pour la suite, `rust-doc book` ouvre le livre officiel de Rust, hors ligne.
 
 ## Commandes
 
@@ -94,8 +117,8 @@ nvrust-install --force                        # seulement si nvim-config a chang
 
 Points à connaître :
 
-- **Refus en cas de modifications locales.** Si vous avez modifié un fichier de l'environnement sans le commiter, `devenv-sync` s'arrête et les liste. Commitez-les, abandonnez-les, ou lancez `devenv-sync --force` pour les **écraser** par la version du modèle.
-- **Ne lancez pas `devenv update` vous-même.** La version de Rust est fixée par `devenv.lock`, identique pour tout le groupe. La modifier vous écarterait du cours, et `devenv-sync` l'écraserait de toute façon.
+- **Refus en cas de modifications locales.** Si vous avez modifié un fichier de l'environnement sans le _commiter_, `devenv-sync` s'arrête et les liste. _Commitez_-les, abandonnez-les, ou lancez `devenv-sync --force` pour les **écraser** par la version du modèle.
+- **Ne lancez pas `devenv update` vous-même.** La version de **Rust** est fixée par `devenv.lock`. La modifier vous écarterait du dépôt-modèle, et `devenv-sync` l'écraserait de toute façon.
 - **Le script lui-même est mis à jour par la synchronisation.** Une évolution du script ne s'applique donc qu'à la synchronisation suivante, après avoir relancé `devenv shell`.
 
 ### Personnaliser sans perdre ses réglages
@@ -108,11 +131,13 @@ Toute modification directe de `devenv.nix` est perdue à la prochaine synchronis
 }
 ```
 
-`devenv.local.nix` et `devenv.local.yaml` sont ignorés par Git (voir `.gitignore`) : ils ne sont **jamais écrasés** par `devenv-sync`, mais ils ne sont pas non plus versionnés. Sauvegardez-les vous-même si vous y tenez.
+`devenv.local.nix` et `devenv.local.yaml` sont ignorés par _Git_ (voir `.gitignore`) : ils ne sont **jamais écrasés** par `devenv-sync`, mais ils ne sont pas non plus versionnés. Sauvegardez-les vous-même si vous y tenez.
 
 ## Deux façons d'utiliser Neovim
 
 ### Voie 1 : la configuration de l'environnement (`nvrust`)
+
+![dashboard](IMG/dashboard.png)
 
 Elle est isolée de l'éventuelle configuration présente sur le sysème. Elle vit dans des dossiers `nvrust` (par exemple `~/.config/nvrust`) et ne touche jamais au `~/.config/nvim` du système.
 
@@ -121,9 +146,11 @@ nvrust-install        # copie la configuration dans ~/.config/nvrust
 nvrust src/main.rs    # lance Neovim et ouvre le fichier `src/main.rs`
 ```
 
-Au premier lancement, **Neovim** télécharge deux plugins (le thème `catppuccin` et le tableau de bord `dashboard-nvim`) depuis **GitHub**, après une demande de confirmation (`Proceed? [Y]es, (N)o, (A)lways`) : répondez `Y`. Les versions des plugins sont verrouillées par `nvim-config/nvim-pack-lock.json`.
+Au premier lancement, **Neovim** télécharge deux _plugins_ (le thème `catppuccin` et le tableau de bord `dashboard-nvim`) depuis **GitHub**, après une demande de confirmation (`Proceed? [Y]es, (N)o, (A)lways`) : répondez `Y`. Les versions des _plugins_ sont verrouillées par `nvim-config/nvim-pack-lock.json`.
 
-Ce qu'elle apporte : coloration syntaxique (syntaxe de Neovim, enrichie par les jetons sémantiques de `rust-analyzer`) et thème, numéros de ligne, presse-papier système (`wl-clipboard` et `xclip` sont fournis par l'environnement), les diagnostics de `rust-analyzer` et les conseils de `clippy` s'affichent en bout de ligne dès le retour en mode Normal (clippy à chaque sauvegarde).
+Ce qu'apporte cette configuraton : la coloration syntaxique (syntaxe de **Neovim**, enrichie par les jetons sémantiques de `rust-analyzer`), un thème, les numéros de ligne, le presse-papier système (`wl-clipboard` et `xclip` sont fournis par l'environnement), les diagnostics de `rust-analyzer` et les conseils de `clippy` qui s'affichent en bout de ligne dès le retour en mode Normal (`clippy` après chaque sauvegarde).
+
+![lsp en action](IMG/lsp.png)
 
 Une police [Nerd Font](https://www.nerdfonts.com/) dans le terminal est recommandée pour afficher correctement les icônes du tableau de bord.
 
@@ -143,7 +170,7 @@ Auto-complétion du code :
 
 ### Voie 2 : Le **Neovim** présent sur le système
 
-Lancez simplement `nvim` **depuis `devenv shell`** : il utilise alors le `rust-analyzer` de la chaîne d'outils `toolchain` de l'environnement, et non une copie installée ailleurs. Pour vérifier lequel est utilisé, dans **Neovim** :
+Lancez simplement `nvim` **depuis `devenv shell`** : il utilise alors le `rust-analyzer` de la chaîne d'outils `toolchain` de l'environnement, et non une copie installée ailleurs, sauf si celui-ci est défini via **Mason**. Pour vérifier lequel est utilisé, dans **Neovim** :
 
 ```
 :lua print(vim.fn.exepath("rust-analyzer"))
@@ -159,6 +186,8 @@ Pour afficher les conseils de `clippy` dans votre éditeur, régler `check.comma
 devenv.nix       environnement : Rust, scripts, Neovim            (synchronisé)
 devenv.yaml      sources de l'environnement (nixpkgs, rust-overlay) (synchronisé)
 devenv.lock      versions épinglées                               (synchronisé)
+docs/
+  neovim.md      Les commandes essentielles de Neovim
 nvim-config/     configuration Neovim du cours                    (synchronisé)
   init.lua
   lsp/rust_analyzer.lua
@@ -183,9 +212,9 @@ devenv test
 
 Puis _commiter_ le `devenv.lock` modifié. Les utilisateurs récupèrent la nouvelle version avec `git pull`.
 
-**Publier une évolution de l'environnement** : tout changement de `devenv.nix`, `devenv.yaml`, `devenv.lock` ou `nvim-config/` poussé sur `main` est repris par `devenv-sync` à la prochaine synchronisation des apprenants.
+**Publier une évolution de l'environnement** : tout changement de `devenv.nix`, `devenv.yaml`, `devenv.lock` ou `nvim-config/` poussé sur `main` est repris par `devenv-sync` à la prochaine synchronisation par les utilisateurs.
 
-**Ajouter ou renommer un fichier d'environnement** : la liste des fichiers synchronisés est la variable `managed` du script `devenv-sync` dans `devenv.nix`. Après l'avoir modifiée, les apprenants doivent synchroniser **deux fois** : la première apporte le nouveau script, la seconde applique la nouvelle liste.
+**Ajouter ou renommer un fichier d'environnement** : la liste des fichiers synchronisés est la variable `managed` du script `devenv-sync` dans `devenv.nix`. Après l'avoir modifiée, les utilisateurs doivent synchroniser **deux fois** : la première apporte le nouveau script, la seconde applique la nouvelle liste.
 
 **Activer le mode modèle** : _Settings → General → Template repository_. Seule la branche par défaut est copiée dans les dépôts créés, sans les étiquettes.
 
