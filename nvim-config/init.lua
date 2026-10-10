@@ -39,3 +39,8 @@ require("dashboard").setup({
 
 -- LSP 'Rust'
 vim.lsp.enable("rust_analyzer")
+-- Diagnostics (rust-analyzer, clippy) : message en bout de ligne
+vim.diagnostic.config({
+	virtual_text = true,
+	severity_sort = true,
+})
