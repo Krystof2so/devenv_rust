@@ -9,7 +9,7 @@ local opt = vim.opt
 -- ***************************
 -- * 1. Comportement général *
 -- ***************************
-opt.colorcolumn = "120" -- str : Afficher la colonne pour la longueur maximale de ligne
+opt.colorcolumn = "100" -- str : Afficher la colonne pour la longueur maximale de ligne
 opt.number = true -- bool : Afficher les numéros de ligne
 opt.relativenumber = true -- bool : Afficher les numéros de ligne relatifs
 opt.numberwidth = 4 -- int : Largeur de la colonne des numéros de ligne
@@ -96,7 +96,7 @@ opt.showtabline = 2 -- int : 2 -> Toujours afficher la tabline
 opt.showcmd = true -- bool : Montre la commande en bas à gauche
 opt.cmdheight = 2 -- int : Hauteur de la ligne de commande
 opt.laststatus = 3 -- int : Afficher une ligne de statut unique
-opt.timeoutlen = 300 -- int :  durée d'attente en ms pour les séquences de touches (par défaut 1000ms). Avec which-key, une valeur plus courte améliore la réactivité de l'affichage du popup
+opt.timeoutlen = 300 -- int :  durée d'attente en ms pour les séquences de touches (par défaut 1000ms)
 opt.splitkeep = "screen" -- str : Stabilise le curseur dans les splits lors des redimensionnements
 opt.virtualedit = "block" -- str : Permet au curseur de se déplacer là où il n'y a pas de caractère (utile en mode visuel bloc)
 
