@@ -123,7 +123,7 @@ nvrust src/main.rs    # lance Neovim et ouvre le fichier `src/main.rs`
 
 Au premier lancement, **Neovim** télécharge deux plugins (le thème `catppuccin` et le tableau de bord `dashboard-nvim`) depuis **GitHub**, après une demande de confirmation (`Proceed? [Y]es, (N)o, (A)lways`) : répondez `Y`. Les versions des plugins sont verrouillées par `nvim-config/nvim-pack-lock.json`.
 
-Ce qu'elle apporte : coloration et thème, numéros de ligne, presse-papier système (`wl-clipboard` et `xclip` sont fournis par l'environnement), les diagnostics de `rust-analyzer` et les conseils de `clippy` s'affichent en bout de ligne dès le retour en mode Normal (clippy à chaque sauvegarde).
+Ce qu'elle apporte : coloration syntaxique (syntaxe de Neovim, enrichie par les jetons sémantiques de `rust-analyzer`) et thème, numéros de ligne, presse-papier système (`wl-clipboard` et `xclip` sont fournis par l'environnement), les diagnostics de `rust-analyzer` et les conseils de `clippy` s'affichent en bout de ligne dès le retour en mode Normal (clippy à chaque sauvegarde).
 
 Une police [Nerd Font](https://www.nerdfonts.com/) dans le terminal est recommandée pour afficher correctement les icônes du tableau de bord.
 
