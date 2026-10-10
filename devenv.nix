@@ -108,15 +108,19 @@
     git fetch "$remote_name" "$branch"
 
     # nvim-config : suppression préalable pour répercuter les fichiers retirés en amont
-    git rm -rq --ignore-unmatch nvim-config
+    git rm -rqf --ignore-unmatch nvim-config
     git checkout "$remote_name/$branch" -- $managed
 
     echo
-    echo "Fichiers mis à jour :"
-    git status --short
-    echo
-    echo "Vérifiez, puis : git commit -m \"Mise à jour de l'environnement\""
-    echo "Relancez ensuite 'devenv shell'. Si nvim-config a changé : nvrust-install --force"
+    if [ -z "$(git status --porcelain -- $managed)" ]; then
+      echo "Les fichiers de l'environnement correspondent au dépôt modèle (aucune différence avec votre dernier commit)."
+    else
+      echo "Fichiers mis à jour :"
+      git status --short
+      echo
+      echo "Vérifiez, puis : git commit -m \"Mise à jour de l'environnement\""
+      echo "Relancez ensuite 'devenv shell'. Si nvim-config a changé : nvrust-install --force"
+    fi
   '';
 }
 
