@@ -121,5 +121,16 @@
       echo "Relancez ensuite 'devenv shell'. Si nvim-config a changé : nvrust-install --force"
     fi
   '';
+
+    # Message d'accueil à l'entrée dans l'environnement
+  enterShell = ''
+    if [ -t 1 ]; then
+      echo
+      echo "🦀  Environnement Rust avec devenv — $(rustc --version)"
+      echo "    rust-check : fmt + clippy + tests   |   rust-doc : documentation hors ligne"
+      echo "    nvrust     : Neovim personnalisé    |   devenv-sync : mise à jour de l'environnement"
+      echo
+    fi
+  '';
 }
 
