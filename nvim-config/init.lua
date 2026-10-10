@@ -39,8 +39,36 @@ require("dashboard").setup({
 
 -- LSP 'Rust'
 vim.lsp.enable("rust_analyzer")
+
 -- Diagnostics (rust-analyzer, clippy) : message en bout de ligne
 vim.diagnostic.config({
 	virtual_text = true,
 	severity_sort = true,
+})
+
+-- Complétion LSP intégrée : le menu s'ouvre en tapant des lettres, pas seulement après . et ::
+vim.api.nvim_create_autocmd("LspAttach", {
+	callback = function(args)
+		local client = vim.lsp.get_client_by_id(args.data.client_id)
+		if not client or not client:supports_method("textDocument/completion") then
+			return
+		end
+
+		-- Ajouter les lettres aux caractères déclencheurs annoncés par le serveur
+		local provider = client.server_capabilities.completionProvider
+		if provider then
+			local chars, seen = {}, {}
+			for _, c in ipairs(provider.triggerCharacters or {}) do
+				chars[#chars + 1], seen[c] = c, true
+			end
+			for c in ("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_"):gmatch(".") do
+				if not seen[c] then
+					chars[#chars + 1] = c
+				end
+			end
+			provider.triggerCharacters = chars
+		end
+
+		vim.lsp.completion.enable(true, client.id, args.buf, { autotrigger = true })
+	end,
 })

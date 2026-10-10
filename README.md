@@ -56,24 +56,24 @@ Premier essai : `cargo run`, puis `rust-check` avant chaque commit.
 
 Tout se passe ensuite dans `devenv shell`.
 
-| Commande          | Rôle                                                                                         |
-| ----------------- | -------------------------------------------------------------------------------------------- |
-| `cargo run`       | compiler et lancer le projet                                                                 |
-| `cargo fmt`       | formater le code                                                                             |
-| `cargo clippy`    | lancer le linter                                                                             |
-| `cargo test`      | lancer les tests                                                                             |
-| `rust-check`      | enchaîner `cargo fmt --check`, `cargo clippy` et `cargo test` : à lancer avant chaque commit |
-| `devenv test`     | exécuter la même vérification (code de sortie non nul si une étape échoue)                   |
-| `rust-doc`        | ouvrir la documentation officielle de Rust (hors ligne) dans le navigateur                   |
-|                   | `rust-doc --list` pour voir les sujets -> `rust-doc sujet` pour ouvrir directement           |
-| `devenv-sync`     | mettre à jour l'environnement depuis le dépôt modèle (voir ci-dessous)                       |
-| `nvrust-install`  | installer la configuration Neovim du cours                                                   |
-| `nvrust-uninstall`| désinstaller la configuration Neovim du cours                                                |
-| `nvrust`          | lancer Neovim avec cette configuration                                                       |
+| Commande           | Rôle                                                                                         |
+| ------------------ | -------------------------------------------------------------------------------------------- |
+| `cargo run`        | compiler et lancer le projet                                                                 |
+| `cargo fmt`        | formater le code                                                                             |
+| `cargo clippy`     | lancer le linter                                                                             |
+| `cargo test`       | lancer les tests                                                                             |
+| `rust-check`       | enchaîner `cargo fmt --check`, `cargo clippy` et `cargo test` : à lancer avant chaque commit |
+| `devenv test`      | exécuter la même vérification (code de sortie non nul si une étape échoue)                   |
+| `rust-doc`         | ouvrir la documentation officielle de Rust (hors ligne) dans le navigateur                   |
+|                    | `rust-doc --list` pour voir les sujets -> `rust-doc sujet` pour ouvrir directement           |
+| `devenv-sync`      | mettre à jour l'environnement depuis le dépôt modèle (voir ci-dessous)                       |
+| `nvrust-install`   | installer la configuration Neovim du cours                                                   |
+| `nvrust-uninstall` | désinstaller la configuration Neovim du cours                                                |
+| `nvrust`           | lancer Neovim avec cette configuration                                                       |
 
 Sans `xdg-open` sur votre système, `rust-doc` affiche le chemin du fichier à ouvrir.
 
- `devenv info` permet d'avoir un descriptif des scripts qui figurent dans `devenv.nix`.
+`devenv info` permet d'avoir un descriptif des scripts qui figurent dans `devenv.nix`.
 
 ## Mettre à jour son environnement
 
@@ -128,11 +128,16 @@ Ce qu'elle apporte : coloration et thème, numéros de ligne, presse-papier syst
 Une police [Nerd Font](https://www.nerdfonts.com/) dans le terminal est recommandée pour afficher correctement les icônes du tableau de bord.
 
 - **Mettre à jour la configuration** (après un `git pull`) : `nvrust-install --force` (après un `devenv-sync`). L'ancienne configuration est sauvegardée dans `~/.config/nvrust.bak-<date>`. Sans `--force`, le script refuse d'écraser une configuration existante.
-- **Désinstaller** :
+- **Désinstaller** : `nvrust-uninstall`.
 
-```bash
-  rm -rf ~/.config/nvrust ~/.local/share/nvrust ~/.local/state/nvrust ~/.cache/nvrust
-```
+Auto-complétion du code :
+
+| Touche (mode Insertion) | Action                                                                 |
+| ----------------------- | ---------------------------------------------------------------------- |
+| `CTRL-N` / `CTRL-P`     | entrée suivante / précédente du menu (qui s'ouvre tout seul en tapant) |
+| `CTRL-Y`                | valider l'entrée sélectionnée                                          |
+| `CTRL-E`                | fermer le menu                                                         |
+| `CTRL-X CTRL-O`         | rouvrir le menu à la demande                                           |
 
 (adapter `~/.config` si l'on définit soit-même `XDG_CONFIG_HOME`)
 
