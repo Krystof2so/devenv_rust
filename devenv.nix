@@ -10,13 +10,45 @@
     ];
   };
 
-  scripts.rust-doc.description = "Ouvre la documentation officielle de Rust (hors ligne)";
+  scripts.rust-doc.description = "Ouvre la documentation de Rust hors ligne (rust-doc book, rust-doc std, rust-doc --list)";
   scripts.rust-doc.exec = ''
-    doc="$(rustc --print sysroot)/share/doc/rust/html/index.html"
+    root="$(rustc --print sysroot)/share/doc/rust/html"
+    sujet="''${1:-}"
+
+    lister() {
+      echo "Sujets disponibles :"
+      for dir in "$root"/*/; do
+        if [ -f "$dir/index.html" ]; then
+          echo "  $(basename "$dir")"
+        fi
+      done
+    }
+
+    case "$sujet" in
+      "")
+        page="$root/index.html"
+        ;;
+      -l|--list)
+        lister
+        exit 0
+        ;;
+      *)
+        if [ -f "$root/$sujet/index.html" ]; then
+          page="$root/$sujet/index.html"
+        elif [ -f "$root/$sujet.html" ]; then
+          page="$root/$sujet.html"
+        else
+          echo "Sujet inconnu : $sujet"
+          lister
+          exit 1
+        fi
+        ;;
+    esac
+
     if command -v xdg-open >/dev/null 2>&1; then
-      xdg-open "$doc"
+      xdg-open "$page"
     else
-      echo "Documentation locale : $doc"
+      echo "Documentation locale : $page"
     fi
   '';
 

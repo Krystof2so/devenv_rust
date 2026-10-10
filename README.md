@@ -65,6 +65,7 @@ Tout se passe ensuite dans `devenv shell`.
 | `rust-check`      | enchaîner `cargo fmt --check`, `cargo clippy` et `cargo test` : à lancer avant chaque commit |
 | `devenv test`     | exécuter la même vérification (code de sortie non nul si une étape échoue)                   |
 | `rust-doc`        | ouvrir la documentation officielle de Rust (hors ligne) dans le navigateur                   |
+|                   | `rust-doc --list` pour voir les sujets -> `rust-doc sujet` pour ouvrir directement           |
 | `devenv-sync`     | mettre à jour l'environnement depuis le dépôt modèle (voir ci-dessous)                       |
 | `nvrust-install`  | installer la configuration Neovim du cours                                                   |
 | `nvrust-uninstall`| désinstaller la configuration Neovim du cours                                                |
