@@ -37,6 +37,7 @@
   '';
 
   packages = [
+    pkgs.git
     pkgs.neovim
     pkgs.wl-clipboard # presse-papier système sous Wayland
     pkgs.xclip # presse-papier système sous X11

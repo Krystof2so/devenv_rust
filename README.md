@@ -16,7 +16,7 @@ L'environnement fournit :
 
 ## Prérequis
 
-- **Linux**, avec **git**
+- **Linux**, avec **git** (dans l'environnement, c'est la version fournie par **devenv** qui est utilisée)
 - **Nix**, installé en mode démon : voir [devenv.sh/getting-started](https://devenv.sh/getting-started/)
 - Les fonctions expérimentales de **Nix**, nécessaires à l'installation de devenv. Ajouter la ligne qui suit dans `~/.config/nix/nix.conf`
 
