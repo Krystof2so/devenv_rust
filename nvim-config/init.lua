@@ -1,3 +1,7 @@
+-- *****************************************************************************
+-- * Initialise la configuration de Neovim de l'environnement de développement *
+-- *****************************************************************************
+
 -- Options personnalisées
 require("core.options")
 
