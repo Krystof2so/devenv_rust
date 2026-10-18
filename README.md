@@ -192,6 +192,7 @@ nvim-config/     configuration Neovim du cours                    (synchronisé)
   init.lua
   lsp/rust_analyzer.lua
   lua/core/options.lua
+  lua/core/folfding.lua    Documentation de code (pliage automatique à l'ouverture)
   nvim-pack-lock.json
 Cargo.toml       projet Rust de départ (à vous)
 Cargo.lock
