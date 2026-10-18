@@ -4,6 +4,7 @@
 
 -- Options personnalisées
 require("core.options")
+require("core.folding").setup()
 
 -- Plugins
 vim.pack.add({

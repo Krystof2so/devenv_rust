@@ -124,10 +124,3 @@ opt.smartindent = true -- bool : Activer l'indentation intelligente basée sur l
 opt.linebreak = true -- bool : Casse les lignes de texte seulement aux espaces (utile si wrap est activé)
 opt.wrap = false -- bool : Désactiver le retour automatique à la ligne à l'affichage
 
--- ***************
--- * 15. Folding *
--- ***************
--- Désactiver uniquement le repliement automatique :
-opt.foldenable = false -- Désactive le repliement
-opt.foldmethod = "manual" -- Mode manuel
-opt.foldcolumn = "0" -- Masque la colonne de repliement
